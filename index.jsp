@@ -66,18 +66,11 @@
         .error {
             color: red;
             font-size: 0.9em;
-            display: none;
-            margin-top: 5px;
         }
         .success {
             color: green;
-            font-size: 1.1em;
             display: none;
-            margin-top: 15px;
             font-weight: bold;
-            padding: 10px;
-            background-color: #e8f5e9;
-            border-radius: 5px;
         }
     </style>
 </head>
@@ -92,19 +85,19 @@
         </h2>
 
         <div class="form-container">
-            <form id="validationForm" onsubmit="return validateForm(event)">
+            <form id="validationForm" onsubmit="validateForm(event)">
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" maxlength="10" />
+                    <input type="text" id="phoneNumber" name="phoneNumber" />
                     <div id="phoneError" class="error"></div>
                 </div>
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" maxlength="30" />
+                    <input type="text" id="firstName" name="firstName" />
                     <div id="nameError" class="error"></div>
                 </div>
                 <button type="submit">Submit</button>
-                <div id="formSuccess" class="success">Form submitted successfully! All fields are valid.</div>
+                <div id="successMessage" class="success"></div>
             </form>
         </div>
     </div>
@@ -112,61 +105,54 @@
     <script>
         function validateForm(event) {
             event.preventDefault();
-            
+
             const phoneNumber = document.getElementById("phoneNumber").value.trim();
             const firstName = document.getElementById("firstName").value.trim();
-            
+
             const phoneError = document.getElementById("phoneError");
             const nameError = document.getElementById("nameError");
-            const formSuccess = document.getElementById("formSuccess");
-            
-            // Reset all messages
-            phoneError.style.display = "none";
-            nameError.style.display = "none";
-            formSuccess.style.display = "none";
-            
-            let isValid = true;
+            const successMessage = document.getElementById("successMessage");
 
-            // Phone number validation
+            phoneError.innerHTML = "";
+            nameError.innerHTML = "";
+            successMessage.style.display = "none";
+
+            let valid = true;
+
             if (phoneNumber === "") {
-                phoneError.textContent = "Phone number is required";
-                phoneError.style.display = "block";
-                isValid = false;
-            } else if (!/^\d+$/.test(phoneNumber)) {
-                phoneError.textContent = "Phone number must contain only digits";
-                phoneError.style.display = "block";
-                isValid = false;
-            } else if (!phoneNumber.startsWith("0")) {
-                phoneError.textContent = "Phone number must start with 0";
-                phoneError.style.display = "block";
-                isValid = false;
-            } else if (phoneNumber.length !== 10) {
-                phoneError.textContent = "Phone number must be exactly 10 digits";
-                phoneError.style.display = "block";
-                isValid = false;
+                phoneError.innerHTML += "<p>Phone number is required.</p>";
+                valid = false;
+            }
+            else if (!/^\d+$/.test(phoneNumber)) {
+               phoneError.textContent = "Phone number must contain only digits";
+               valid = false;
+            }
+            else if (!phoneNumber.startsWith("0")) {
+                phoneError.innerHTML += "<p>Phone number must start with 0.</p>";
+                valid = false;
+            }
+            else if (phoneNumber.length !== 10) {
+                phoneError.innerHTML += "<p>Phone number must be exactly 10 digits long.</p>";
+                valid = false;
             }
 
-            // First name validation
             if (firstName === "") {
-                nameError.textContent = "First name is required";
-                nameError.style.display = "block";
-                isValid = false;
-            } else if (!/^[A-Za-z]+$/.test(firstName)) {
-                nameError.textContent = "First name must contain only English letters";
-                nameError.style.display = "block";
-                isValid = false;
-            } else if (firstName.length > 30) {
-                nameError.textContent = "First name cannot be longer than 30 characters";
-                nameError.style.display = "block";
-                isValid = false;
+                nameError.innerHTML += "<p>First name is required.</p>";
+                valid = false;
+            }
+            else if (!/^[A-Za-z]+$/.test(firstName)) {
+                nameError.innerHTML += "<p>First name must contain only English letters.</p>";
+                valid = false;
+            }
+            else if (firstName.length > 30) {
+                nameError.innerHTML += "<p>First name cannot be longer than 30 characters.</p>";
+                valid = false;
             }
 
-            // Show success message if everything is valid
-            if (isValid) {
-                formSuccess.style.display = "block";
+            if (valid) {
+                successMessage.textContent = "Form submitted successfully!";
+                successMessage.style.display = "block";
             }
-
-            return isValid;
         }
     </script>
 </body>
