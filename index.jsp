@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>DevOps Final Project - Ofir, Sha1, Mishel, Orel</title>
+    <title>DevOps Final Project - Ofir, Sha111, Mishel, Orel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
