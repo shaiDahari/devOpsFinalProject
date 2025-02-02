@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>DevOps Final Project - Ofir, Sha111, Mishel, Orel</title>
+    <title>DevOps Final Project - Ofir, Shai, Mishel, Orel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,7 +76,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="names">Project by: Ofir, Shai, Mishel, Orel</div>
+        <div class="names">Project by: Ofir, Sha111, Mishel, Orel</div>
         <h1>DevOps Final Project</h1>
         <h2>
             Our mission is to deliver our application from development into production,
